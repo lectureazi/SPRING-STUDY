@@ -1,0 +1,7 @@
+package templateMethod.client;
+
+import templateMethod.framework.common.JDBCTemplate;
+
+public class ClientJDBCTemplate extends JDBCTemplate{
+
+}

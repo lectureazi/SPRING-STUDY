@@ -1,0 +1,14 @@
+package bean;
+
+public class Run {
+
+	public static void main(String[] args) {
+		
+		// Spring의 ApplicationContext 객체
+		
+		
+		
+
+	}
+
+}

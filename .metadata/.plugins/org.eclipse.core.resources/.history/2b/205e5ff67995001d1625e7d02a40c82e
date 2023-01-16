@@ -1,0 +1,10 @@
+package bean.cheatsheet;
+
+import java.time.LocalDate;
+
+public class Bean {
+	
+	private Code code;
+	private Date date;
+
+}

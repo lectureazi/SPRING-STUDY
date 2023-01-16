@@ -1,0 +1,20 @@
+package templateMethod.framework;
+
+import java.sql.PreparedStatement;
+import java.util.Map;
+
+import templateMethod.framework.common.JDBCTemplate;
+
+public class JDBCRepository {
+	
+	private JDBCTemplate jdt = JDBCTemplate.getInstance();
+	
+	public Map<String,Object> selectOne(String sql, Map<String, Object> resultSet){
+		
+		
+		PreparedStatement pstm;
+		
+		
+		return resultSet;
+	}
+}

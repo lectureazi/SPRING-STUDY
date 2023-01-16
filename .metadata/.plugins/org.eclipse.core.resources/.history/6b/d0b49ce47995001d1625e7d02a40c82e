@@ -1,0 +1,8 @@
+package bean.cheatsheet;
+
+public class Bean {
+	
+	private Code code;
+	private Date date;
+
+}

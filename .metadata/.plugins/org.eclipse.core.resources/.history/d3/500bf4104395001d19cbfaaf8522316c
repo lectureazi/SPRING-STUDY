@@ -1,0 +1,7 @@
+package strategy.framework;
+
+public interface ConnectionCreator {
+	
+	public Connection getConnection();
+
+}

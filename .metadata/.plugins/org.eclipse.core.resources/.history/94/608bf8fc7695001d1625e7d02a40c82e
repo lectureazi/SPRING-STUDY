@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Spring bean : Spring이 관리하는 객체  -->
+	<bean id="anonymous" class="bean.User"></bean>
+	
+	<!-- 매개변수가 있는 생성자를 사용해 bean을 등록 -->
+	<bean id="hong" class="bean.User">
+	
+		<!-- constructor-arg : 생성자 매개변수 -->
+		<constructor-arg name="name">홍길동</constructor-arg>
+		<constructor-arg index="1">서울시</constructor-arg>
+		<constructor-arg name=""></constructor-arg>
+		
+	</bean>
+
+</beans>

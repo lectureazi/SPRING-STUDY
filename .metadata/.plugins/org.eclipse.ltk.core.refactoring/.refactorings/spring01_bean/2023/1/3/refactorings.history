@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;bean.Address&apos; to &apos;User&apos;&#x0D;&#x0A;- Original project: &apos;spring01_bean&apos;&#x0D;&#x0A;- Original element: &apos;bean.Address&apos;&#x0D;&#x0A;- Renamed element: &apos;bean.User&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Address&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src=/optional=/true=/=/maven.pomderived=/true=/&lt;bean{Address.java[Address" matchStrategy="1" name="User" qualified="false" references="true" similarDeclarations="false" stamp="1673847103771" textual="false" version="1.0"/>
+</session>

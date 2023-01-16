@@ -1,0 +1,15 @@
+package templateMethod.client;
+
+import java.sql.Connection;
+
+import templateMethod.framework.common.JDBCTemplate;
+
+public class ClientJDBCTemplate extends JDBCTemplate{
+
+	@Override
+	public Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

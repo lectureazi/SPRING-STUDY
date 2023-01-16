@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="templateMethod.framework.common.exception.DataAccessException"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="templateMethod.framework.JDBCRepository"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="templateMethod.client.ClientJDBCTemplate"/>
+    <fullyQualifiedTypeName name="templateMethod.framework.common.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="strategy.framework.common.exception.DataAccessException"/>
+    <fullyQualifiedTypeName name="strategy.framework.common.JDBCTemplate"/>
+    <fullyQualifiedTypeName name="strategy.framework.JDBCRepository"/>
+    <fullyQualifiedTypeName name="java.lang.FunctionalInterface"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="strategy.framework.ConnectionCreator"/>
+</qualifiedTypeNameHistroy>

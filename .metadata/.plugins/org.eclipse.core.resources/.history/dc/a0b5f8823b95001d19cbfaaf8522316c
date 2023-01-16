@@ -1,0 +1,12 @@
+package templateMethod.client;
+
+public class Run {
+
+	public static void main(String[] args) {
+		
+		String sql = "select * from member where user_id = 'admin'";
+		
+
+	}
+
+}
