@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="dateBean" class="java.util.Date"></bean>
+	<bean id="codeBean" class="bean.cheatsheet.Code"></bean>
+	<bean id="sin" class="bean.cheatsheet.Score">
+		<constructor-arg name="name" value="신사임당"/>
+		<constructor-arg name="kor" value="110"/>
+		<constructor-arg name="math" value="110"/>
+		<constructor-arg name="eng" value="110"/>
+	</bean>
+	
+	<bean id="bean" class="bean.cheatsheet.Bean">
+		<constructor-arg name="date" ref="dateBean"/>
+		<property name="code" ref="codeBean"/>
+		<property name="number" value="999"/>
+		<property name="array">
+			<array>
+				<value>홍길동</value>
+				<value>김고은</value>
+				<value>공유</value>
+			</array>
+		</property>
+		<property name="list">
+			<list>
+				<value>봄</value>
+				<value>여름</value>
+				<value>"가을"</value>
+				<value>겨울</value>
+			</list>		
+		</property>
+		<property name="set">
+			<set>
+				<value>1</value>
+				<value>2</value>
+				<value>3</value>
+				<value>1</value>			
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry>
+					<key><value>봄</value></key>
+					<value>Spring</value>
+				</entry>
+				<entry key="여름" value="summer"/>
+				<entry key="가을" value="fall"/>
+				<entry key="겨울" value="winter"/>
+			</map>
+		</property>
+		<property name="properties">
+			<props>
+				<prop key="하늘">sky</prop>
+				<prop key="구름">cloud</prop>
+			</props>
+		</property>		
+		<property name="scores">
+			<list>
+				<bean class="bean.cheatsheet.Score">
+					<constructor-arg name="name" value="홍길동"/>
+					<constructor-arg name="kor" value="100"/>
+					<constructor-arg name="math" value="100"/>
+					<constructor-arg name="eng" value="100"/>
+				</bean>		
+				<bean class="bean.cheatsheet.Score">
+					<property name="name" value="임꺽정"/>
+					<property name="kor" value="90"/>
+					<property name="math" value="90"/>
+					<property name="eng" value="90"/>
+				</bean>		
+				<ref bean="sin"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+
+</beans>

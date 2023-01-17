@@ -5,7 +5,37 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2023-01-13T15:15:26Z</updated>
+  <updated>2023-01-17T08:00:00Z</updated>
+  <entry>
+    <title>This Week in Spring - January 17th, 2023</title>
+    <link rel="alternate" href="https://spring.io/blog/2023/01/17/this-week-in-spring-january-17th-2023" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2023-01-17:5058</id>
+    <updated>2023-01-17T08:00:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! I went to Helsinki, Finland, last week, and this week I&amp;rsquo;m in Atlanta, Georgia, to speak at the Atlanta Java User Group. And, of course, next week, I&amp;rsquo;ll be in New York to join a viewing party for the airing of &lt;a href="https://springone.io/"&gt;SpringOne Essentials&lt;/a&gt;. You&amp;rsquo;re going to join us, I trust? It&amp;rsquo;s going to be awesome! &lt;/p&gt;
+&lt;img src="https://pbs.twimg.com/media/FmqJZk2WYBECl4I.jpg"/&gt;
+&lt;p&gt;Look, it&amp;rsquo;s Tuesday. Tuesdays are no fun. We&amp;rsquo;re three solid days away from fun winter ski slopes from Friday. But that&amp;rsquo;s OK because every day is a chance to learn. And this week&amp;rsquo;s no exception: we&amp;rsquo;ve got a ton to look at it, so let&amp;rsquo;s dive right into it! &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2023/01/12/a-bootiful-podcast-mario-fusco-the-drools-rules-engine-project-lead-and-fellow-java-champion"&gt;A Bootiful Podcast: Mario Fusco, the Drools rules engine project lead and fellow Java Champion&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://joshlong.com/jl/blogpost/complex-event-processing-with-esper.html"&gt;Complex Event Processing with Esper and Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://medium.com/@konstde00/spring-boot-multi-tenant-architecture-overview-88198ea3991f"&gt;Spring Boot Multi-tenant Architecture Overview&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2023/01/13/spring-data-2022-0-1-and-2021-2-7-available"&gt;Spring Data 2022.0.1 and 2021.2.7 available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2023/01/11/spring-framework-5-3-25-available-now"&gt;Spring Framework 5.3.25 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2023/01/11/spring-framework-6-0-4-available-now"&gt;Spring Framework 6.0.4 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://feeds.feedblitz.com/~/724391888/0/baeldung~Spring-MVC-Mapping-the-Root-URL-to-a-Page"&gt;Spring MVC ? Mapping the Root URL to a Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2023/01/13/spring-shell-2-1-5-and-3-0-0-rc1-are-now-available"&gt;Spring Shell 2.1.5 and 3.0.0-RC1 are now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://joshlong.com/jl/blogpost/jcmd.html"&gt;Easy JVM Observability with the JCMD CLI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;This is super cool: &lt;a href="https://medium.com/graalvm/graalvm-native-image-meets-risc-v-899be38eddd9"&gt;GraalVM Native Image meets RISC-V&lt;/a&gt; Even cooler? The implementation might pave the way for GraalVM compilation to WebAssembly&amp;hellip; Imagine, friends. One day, through the magic of open source, we could compile a Spring Boot application to WebAssembly. What a time to be alive!&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://feeds.feedblitz.com/~/724129061/0/baeldung~Implementing-Retry-In-Kafka-Consumer"&gt;Implementing Retry In Kafka Consumer&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://medium.com/codex/records-are-here-can-we-remove-lombok-already-63161f8d0f87"&gt;Records Are Here! Can We Remove Lombok Already?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/jobrunr/jobrunr/releases/tag/v6.0.0-M0"&gt;Release v6.0.0-M0 ¡¤ jobrunr/jobrunr. First milestone. This release also supports Spring Authorization Server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://feeds.feedblitz.com/~/724015304/0/baeldung~Flyway-Out-of-Order-Migrations"&gt;Flyway Out of Order Migrations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Shell 2.1.5 and 3.0.0-RC1 are now available</title>
     <link rel="alternate" href="https://spring.io/blog/2023/01/13/spring-shell-2-1-5-and-3-0-0-rc1-are-now-available" />
@@ -628,28 +658,6 @@ dependencyManagement {&#xD;
   }&#xD;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring for Apache Pulsar 0.1.0 available now</title>
-    <link rel="alternate" href="https://spring.io/blog/2022/12/15/spring-for-apache-pulsar-0-1-0-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Chris Bono</name>
-    </author>
-    <id>tag:spring.io,2022-12-15:5038</id>
-    <updated>2022-12-15T21:00:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I¡¯m happy to announce that Spring for Apache Pulsar &lt;code&gt;0.1.0&lt;/code&gt; has been released and is now available from &lt;a href="https://repo1.maven.org/maven2/org/springframework/pulsar/spring-pulsar-spring-boot-starter/0.1.0"&gt;Maven Central&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;This is the initial GA minor release of the framework. The full &lt;code&gt;1.0.0&lt;/code&gt; GA release is expected mid Q12023 and will contain many more features. Although it still lives in the experimental Spring projects it is expected to move into the main Spring projects as part of the full release.&lt;/p&gt;&lt;h2&gt;&lt;a href="#notable-changes" class="anchor" name="notable-changes"&gt;&lt;/a&gt;Notable Changes&lt;/h2&gt;
-&lt;p&gt;We have been busy adding features since our &lt;a href="https://spring.io/blog/2022/08/16/introducing-experimental-spring-support-for-apache-pulsar"&gt;last blog&lt;/a&gt;. Notable new features include:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Reactive support&lt;/li&gt;
-  &lt;li&gt;GraalVM Native Image Support&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Please see the &lt;a href="https://github.com/spring-projects-experimental/spring-pulsar/releases/tag/0.1.0"&gt;release notes&lt;/a&gt; for more detail.&lt;/p&gt;
-&lt;p&gt;A great place to get started is the &lt;a href="https://docs.spring.io/spring-pulsar/docs/0.1.0/reference/html/#quick-tour"&gt;Quick Tour&lt;/a&gt; in the reference docs.&lt;/p&gt;&lt;h2&gt;&lt;a href="#stay-in-touch-hellip" class="anchor" name="stay-in-touch-hellip"&gt;&lt;/a&gt;Stay in touch&amp;hellip;&lt;/h2&gt;
-&lt;p&gt;As always, we welcome feedback and contributions, so please reach out to us on &lt;a href="https://github.com/spring-projects-experimental/spring-pulsar/issues"&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://github.com/spring-projects-experimental/spring-pulsar"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects-experimental/spring-pulsar/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-pulsar/docs/0.1.0/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-pulsar"&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

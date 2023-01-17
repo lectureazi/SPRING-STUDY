@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 
+	AOP : Aspect Oriented Programing
+		   * 관점지향프로그래밍
+		  객체지향프로그래밍 방식으로 구현된 어플리케이션의 규모가 커짐에 따라
+		  객체지향의 모듈화를 하였음에도, 재모듈화 해야할 공통관심사들이 생기기 시작
+		  ex) logging, transaction...
+		  공통관심사들을 모듈화하여 모듈의 재모듈화를 추구하는 방식
+		  
+		  
+		  Aspect(Advisor) : 1. 공통 관심사, 2. Advice + Pointcuts
+		  Advice 		  : 공통 관심사를 모듈화한 객체
+		  Join points 	  : 공통 관심사를 적용할 수 있는 모든 대상
+		  Pointcuts	      : Join points 중 실제로 Advice를 적용할 대상	
+		  target		  : Pointcuts인 객체
+		  Weaving 		  : Advice와 target을 결합해 프록시 객체를 생성하는 과정
+		  Proxy			  : Advice와 target 결합되어 만들어진 프록시 객체
+	
+	 -->
+	<context:component-scan base-package="aop01"/>
+	
+	<!-- 1. Proxy 객체를 생성하는 일을 대신 해줄 bean이 필요
+		    DefaultAdvisorAutoProxyCreator -->
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+	
+	<!-- 2. 공통관심사를 모듈화한 객체(advice)와 주기능을 가지고 있는 target 객체를 합친 Aspect를 만들어줄 bean이 필요
+		AspectJExpressionPointcutAdvisor -->
+	<bean class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+		<property name="advice" ref="developerAdvice"/>
+		
+		<!-- 
+			aspectJ pointcut expression
+			
+			* : 모든, 하위의 모든 패키지
+			.. : 0개 이상
+			execution([접근제한자] 리턴타입 [패키지.클래스.]메서드(매개변수))
+		 -->
+		<property name="expression" value="execution(public * aop01.*.*(..))"></property>
+	</bean>
+	
+</beans>
