@@ -5,9 +5,19 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 <form action="/spring04_servlet/session/login" method="post">
 	<h1>사용하실 닉네임을 입력하세요.</h1>
 	<input type="text" name="nickname">
+	<button>입장하기</button>
+</form>
+
+<hr>
+
+<form action="/spring04_servlet/member/login" method="post">
+	<h1>로그인</h1>
+	<input type="text" name="userId">
+	<input type="password" name="password"> 
 	<button>입장하기</button>
 </form>
 

@@ -6,4 +6,59 @@
   <welcome-file-list>
     <welcome-file>g_session.html</welcome-file>
   </welcome-file-list>
+  
+  <!-- 인코딩필터 -->
+  <filter>
+  	<filter-name>encoding</filter-name>
+  	<filter-class>com.mc.servlet.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- web.xml에서 filter를 등록할 때는, filter chain에 등록될 순서를 지정
+  	 먼저 작성된 filter class가 filter chain의 앞쪽에 위치한다.  -->  
+  <filter>
+  	<filter-name>first</filter-name>
+  	<filter-class>com.mc.servlet.filter.FirstFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>first</filter-name>
+  	<url-pattern>/filter</url-pattern>
+  </filter-mapping>	 
+  	 
+  <filter>
+  	<filter-name>second</filter-name>
+  	<filter-class>com.mc.servlet.filter.SecondFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>second</filter-name>
+  	<url-pattern>/filter</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>viewResolver</filter-name>
+  	<filter-class>com.mc.servlet.filter.ViewResolver</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>viewResolver</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </web-app>

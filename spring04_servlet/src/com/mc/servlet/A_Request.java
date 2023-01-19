@@ -36,6 +36,8 @@ public class A_Request extends HttpServlet {
 		// TODO Auto-generated method stub
 		System.out.println("doGet 메서드 호출");
 		
+		response.setHeader("content-type", "text/html; charset=utf-8");
+		
 		String name = request.getParameter("name");
 		int age = Integer.parseInt(request.getParameter("age"));
 		System.out.println(name + " : " + age);
@@ -51,7 +53,6 @@ public class A_Request extends HttpServlet {
 		
 		
 		///////////////////////////////////////////////////////
-		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

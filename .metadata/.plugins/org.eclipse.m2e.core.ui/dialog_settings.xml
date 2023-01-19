@@ -2,12 +2,14 @@
 <section name="Workbench">
 	<section name="wizardPage">
 		<list key="groupId">
+			<item value="spring04_jsp"/>
 			<item value="spring04_servlet2"/>
 			<item value="spring01_bean"/>
 		</list>
 		<list key="name">
 		</list>
 		<list key="artifactId">
+			<item value="spring04_jsp"/>
 			<item value="spring04_servlet2"/>
 			<item value="spring01_bean"/>
 		</list>

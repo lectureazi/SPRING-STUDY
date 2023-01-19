@@ -65,6 +65,8 @@ public class G_Session extends HttpServlet {
 		// removeAttribute : 세션에서 데이터를 삭제
 		
 		session.setAttribute("user", nickname);
+		session.setMaxInactiveInterval(3600);
+		response.setHeader("set-cookie", "JSESSIONID="+session.getId()+"; Max-Age=3600; path=/spring04_servlet");
 		response.sendRedirect("/spring04_servlet/index.html");
 		
 	}
