@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>redirect</h1>
+<pre>
+	요청을 재요청
+	클라이언트의 요청이 다른 요청으로 진행되고 있거나, 클라이언트가 요청했던 리소스의 위치가 변경 되었거나
+	필요에 의해서 클라이언트의 두번 째 요청이 필요한 경우에 redirect상태코드를 응답해 클라이언트가 다시 요청하도록 할 수 있다.
+	
+	forward			   : 클라이언트가 발생시키는 요청은 1번, 서버는 내부에 요청을 재지정하고 한 번의 응답을 수행
+	redirect		   : 서버가 클라이언트에게 다시 요청하도록 응답하기 때문에, redirect한 횟수만큼 요청과 응답이 발생
+
+</pre>
+<form action="/spring04_servlet/cat">
+	<label>고양이 이름 확인 : <input type="radio" value="name" name="type"></label>
+	<label>고양이 사진 확인 : <input type="radio" value="img" name="type"></label>
+	<button>전송</button>
+</form>
+
+</body>
+</html>

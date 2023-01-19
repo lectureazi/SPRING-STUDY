@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>Cookie</h1>
+	<pre>
+		Cookie는 서버가 클라이언트에게 응답할 때 헤더에 저장해두는 작은 데이터 조각
+		클라이언트는 서버에게 요청 할 때, 해당 Cookie를 요청 헤더에 담아 서버에게 전달
+		
+		Cookie를 사용하는 이유
+		* Http서버는 Stateless 하기 때문에.
+		
+		=> 통신이 끝나면 서버는 클라이언트의 상태를 알 수 없다.
+		, 예전 방문 클라이언트인지, 인증서버에 의해 인증된 사용자인지, 예전에 공격한 이력이 있는 사용자인지...
+		알 수가 없다.
+		
+		서버가 응답헤더에 담아 보내는 Cookie의 데이터가 곧 해당 클라이언트에 대해 기억하고자 하는 내용, 
+		또는 해당 내용에 접근하기 위한 key
+		
+		ex) 클라이언트의 마지막 접속 시간, 회원정보로 접근하기 위한 키값, 비로그인 상태에서 추가한 장바구니 정보 등등...
+	</pre>
+	<form action="/spring04_servlet/cookie">
+		<label>프로그래밍 언어 : <input type="text" name="search" id="search" list="lang"></label>
+		<datalist id="lang">
+			<option value="java"/>
+			<option value="mysql"/>
+			<option value="html"/>
+			<option value="css"/>
+			<option value="javascript"/>
+		</datalist>
+		<button>전송</button>
+	</form>
+	
+	<div id='cookieNote' class='note'></div>
+	<script type="text/javascript">
+		//새로운 쿠키를 추가
+		//document.cookie ='js-cookie=자바스크립트가 추가한 쿠키입니다.; max-age=20';
+		//자바스크립트를 사용해 쿠키 확인
+		//document.querySelector('.note').innerHTML += document.cookie;
+	</script>
+</body>
+</html>

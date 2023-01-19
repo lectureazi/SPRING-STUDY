@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>spring04_servlet</display-name>
+  
+  <!-- welcome file, webapplication의 root 경로로 요청할 시, 사용자가 응답할 페이지 -->
+  <welcome-file-list>
+    <welcome-file>g_session.html</welcome-file>
+  </welcome-file-list>
+</web-app>

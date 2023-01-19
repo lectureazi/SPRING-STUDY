@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Cache</h1>
+	<pre>
+		 Cache
+		 브라우저는 정적 리소스에 대한 요청이 발생할 경우, 매번 서버에 직접 요청하는 것이 아니라
+		 브라우저의 Cache 저장소에 있는 정적리소스를 응답하는 경우가 있다.
+		
+		 ETag : 리소스가 수정된 이력이 있는지 체크하기 위한 식별자
+				리소스가 생성되거나 수정될 때 새롭게 부여되는 식별자
+				1바이트라도 변경이 발생하거나, 또는 최종 수정일이 변경되면 새로운 ETag값을 부여
+		
+		 브라우저는, 서버로부터 정적리소스를 받을 때 ETag값도 함께 받아 저장한다.
+		 사용자가 브라우저를 통해 정적리소스에 대한 요청을 발생시킬 경우 브라우저는 서버에게 
+		 해당 리소스의 ETag 값을 확인 해줄 것을 요청한다.
+		
+		 만약 브라우저의 ETag와 서버의 ETag가 같을 경우 브라우저는 캐시저장소에서 정적리소스를 가져와 클라이언트에게 제공 
+		
+		 Http Message의 Cache-Control : 캐시 정책을 지정
+		 no-store : 캐시를 저장하지 않음.
+		 no-cache : 매번 서버에서 해당 리소스의 ETag를 확인
+		 max-age : 캐시의 수명을 지정, 단위는 초, 수명이 끝나기 전에는 서버에서 ETag 확인 없이 리소스를 캐시에서 반환
+					수명이 만료되면 no-cache와 동일하게 동작
+	
+	</pre>
+	<form action="/spring04_servlet/cache">
+		<button>고양이사진</button>
+	</form>
+
+</body>
+</html>

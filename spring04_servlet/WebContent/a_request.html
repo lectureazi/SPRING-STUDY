@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Request</h1>
+	<h2>Get</h2>
+	<pre>
+		GET메서드는 서버로부터 정보를 조회하기 위해 설계된 Http메서드이다.
+		요청파라미터는 쿼리스트링을 통해 전달한다
+		query String : url?name=value&name=value
+		
+		GET방식의 경우 요청파라미터가 브라우저의 주소창을 통해 노출되어 보안이 취약하고
+		url은 전송길이에 제한이 있어 많은 정보를 전달할 수 없어, 정보를 전달하는 용도로는 부적절하다.
+	</pre>
+	<form action="/spring04_servlet/req" >
+		<label>name : <input type="text" name="name"></label><br>
+		<label>age : <input type="number" name="age"></label><br>
+		<button>전송</button>
+	</form>
+	
+	<h2>POST</h2>
+	<pre>
+		POST 메서드는 리소스를 생성/변경하기 위해 설계되었다.
+		요청파라미터를 http message의 body에 담아서 전달한다.
+		전송하는 길이에 제한이 없다.
+		body에 담기는 데이터에 대한 content-type 헤더를 작성해야 한다.
+		form tag를 사용해 요청을 할 경우 default로 application/x-www-form-urlencoded 방식이 지정된다.
+	</pre>
+	<form action="/spring04_servlet/req" method="post">
+		<label>name : <input type="text" name="name"></label><br>
+		<label>age : <input type="number" name="age"></label><br>
+		<button>전송</button>
+	</form>
+	
+	<h2>POST, enctype="multipart/form-data"</h2>
+	<pre>
+		multipart/form-data : 하나의 요청에 여러 mime타입의 데이터를 전송하는 경우 사용하는 content-type
+	</pre>
+	<form action="/spring04_servlet/req" method="post" enctype="multipart/form-data">
+		<label>name : <input type="text" name="name"></label><br>
+		<label>file : <input type="file" name="file"></label><br>
+		<button>전송</button>
+	</form>
+
+
+
+
+
+
+
+
+</body>
+</html>
