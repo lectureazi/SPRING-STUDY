@@ -1,7 +1,0 @@
-package strategy.client;
-
-import strategy.framework.ConnectionCreator;
-
-public class ClientConnector implements ConnectionCreator{
-
-}
