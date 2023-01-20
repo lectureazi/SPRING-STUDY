@@ -34,6 +34,8 @@ public class ViewResolver implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		ViewWrapper requestWrapper = new ViewWrapper((HttpServletRequest) request);
+		System.out.println("viewResolver");
+		requestWrapper.testAddMethod();
 		chain.doFilter(requestWrapper, response);
 	}
 
@@ -42,6 +44,7 @@ public class ViewResolver implements Filter {
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
 		// TODO Auto-generated method stub
+		System.out.println("viewResolver");
 	}
 
 }

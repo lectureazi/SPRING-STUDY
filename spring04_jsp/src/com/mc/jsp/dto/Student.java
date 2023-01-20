@@ -9,7 +9,6 @@ public class Student {
 	private int coding;
 	
 	public String getName() {
-		System.out.println("getName");
 		return name;
 	}
 	

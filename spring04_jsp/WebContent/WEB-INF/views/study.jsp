@@ -10,8 +10,6 @@
 <h1>JSP 기초</h1>
 
 
-
-
 <pre>
 	SSR(Server side Rendering) : 화면을 서버에서 구성하여 클라이언트에게 전달 ex) jsp, thymeleaf...
 	CSR(Client side Rendering) : 서버에서는 데이터만 받아 클라이언트에서 화면울 구성하는 방식 ex) react, vue, angular...

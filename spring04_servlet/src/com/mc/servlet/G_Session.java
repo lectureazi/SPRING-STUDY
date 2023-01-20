@@ -20,7 +20,6 @@ public class G_Session extends HttpServlet {
      */
     public G_Session() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
