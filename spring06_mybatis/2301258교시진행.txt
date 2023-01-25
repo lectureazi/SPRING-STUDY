@@ -1,0 +1,15 @@
+2023 01 25 8교시 진행 내용
+
+1. RentHistory 과제 풀이
+
+2. Mybatis Dynamic 쿼리 설명
+	ref : https://mybatis.org/mybatis-3/ko/dynamic-sql.html
+
+3. Mybatis Dynamic IF tag
+		MybatisTest.class : dynamicIf ,   mybatisMapper : dynamicIf
+
+4. Mybatis Dynamic Choose tag
+		MybatisTest.class : dynamicChoose ,  mybatisMapper : dynamicChoose
+
+5. Mybatis Dynamic Set tag
+		MybatisTest.class : dynamicSet ,  mybatisMapper : dynamicSet

@@ -2,6 +2,7 @@ package com.mc.mvc.member.controller;
 
 import java.util.Map;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mc.mvc.member.dto.Member;
+import com.mc.mvc.member.service.MemberService;
 
 //@Controller
 //1. 해당 클래스의 인스턴스를 ApplicationContext에 빈으로 등록
@@ -32,6 +34,14 @@ import com.mc.mvc.member.dto.Member;
 @RequestMapping("/member")
 public class MemberController {
 	
+	private MemberService memberService;
+	
+	public MemberController(MemberService memberService) {
+		super();
+		this.memberService = memberService;
+		System.out.println("memberService : " + memberService.getClass());
+	}
+
 	@GetMapping("/signup")
 	public void signup() {};
 	
@@ -48,10 +58,13 @@ public class MemberController {
 		// model.addAttribute(dummy);
 		model.addAttribute("dummy", dummy);
 		System.out.println(model);
-		
 		return "member/mypage";
 	}
 	
+	@GetMapping("/checkId")
+	public void checkId(){
+		System.out.println(memberService.selectUserById());
+	}
 	
 	
 	

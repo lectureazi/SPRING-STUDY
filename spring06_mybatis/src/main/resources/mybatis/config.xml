@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.mc.mvc.member.dto.Member" alias="Member"/>
+		<typeAlias type="com.mc.mvc.rent.dto.Rent" alias="Rent"/>
+		<typeAlias type="com.mc.mvc.rent.dto.RentBook" alias="RentBook"/>
+		<typeAlias type="com.mc.mvc.rent.dto.RentHistory" alias="RentHistory"/>
+		<typeAlias type="com.mc.mvc.book.dto.Book" alias="Book"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/mapper/mybatisMapper.xml"/>
+	</mappers>
+
+
+</configuration>

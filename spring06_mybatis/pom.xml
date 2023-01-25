@@ -16,6 +16,7 @@
 	</properties>
 	
 	<dependencies>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -45,6 +46,43 @@
 		    <version>${org.springframework-version}</version>
 		    <type>pom</type>
 		    <scope>import</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${org.springframework-version}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		
+		<!-- Mybatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.5.11</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.mybatis</groupId>
+    		<artifactId>mybatis-spring</artifactId>
+    		<version>2.0.6</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-orm</artifactId>
+    		<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- Connection pool : 통신에 필요한 Connection 객체를 미리 생성해서 저장해두는 객체  -->
+		<dependency>
+    		<groupId>org.apache.commons</groupId>
+   			<artifactId>commons-dbcp2</artifactId>
+    		<version>2.9.0</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>8.0.28</version>
 		</dependency>
 				
 		<!-- AspectJ -->
@@ -137,6 +175,7 @@
 		    <version>4.13.2</version>
 		    <scope>test</scope>
 		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>
