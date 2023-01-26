@@ -1,6 +1,5 @@
 package com.mc.mvc.mybatis;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.mc.mvc.book.dto.Book;
 import com.mc.mvc.member.dto.Member;
 import com.mc.mvc.member.repository.MemberRepository;
+import com.mc.mvc.mybatis.repository.MybatisRepository;
 import com.mc.mvc.rent.dto.Rent;
 import com.mc.mvc.rent.dto.RentBook;
 import com.mc.mvc.rent.dto.RentHistory;
@@ -31,19 +31,10 @@ import com.mc.mvc.rent.dto.RentHistory;
 public class MybatisTest {
 	
 	@Autowired
-	private SqlSessionTemplate session;
-	@Autowired
 	private MemberRepository memberRepository;
 	
-	private final String NAMESPACE = "com.mc.mvc.Myabtis.";
-	
-	//SqlSessionTemplate 객체의 메서드
-	
-	//selectOne : 단일 행 반환 받는 select문
-	//selectList : 다중 행 반환 받는 select문
-	//insert	: insert문 실행. 쿼리에 의해 영향을 받은 row수
-	//update	: update문 실행. 쿼리에 의해 영향을 받은 row수
-	//delete	: delete문 실행. 쿼리에 의해 영향을 받은 row수
+	@Autowired
+	private MybatisRepository mybatisRepository;
 
 	@Test
 	public void testCheckId() {
@@ -53,12 +44,12 @@ public class MybatisTest {
 	@Test
 	public void testSelectOne() {
 		//com.mc.mvc.Myabtis.selectOne
-		session.selectOne(NAMESPACE + "selectOne", "admin");
+		mybatisRepository.selectOne("admin");
 	}
 	
 	@Test
 	public void testSelectList() {
-		List<Member> members = session.selectList(NAMESPACE+"selectList");
+		List<Member> members = mybatisRepository.selectList();
 		System.out.println(members);
 	}
 	
@@ -70,19 +61,20 @@ public class MybatisTest {
 		
 		// #{userId} => member.getUserId
 		// #{password} => member.getPassword		
-		List<Member> members = session.selectList(NAMESPACE+"selectListWithDTO", member);
+		List<Member> members = mybatisRepository.selectListWithDTO(member);
 		System.out.println(members);
 	}
 	
 	@Test
 	public void testSelectListWithMap() {
-		List<Member> members = session.selectList(NAMESPACE+"selectListWithMap", Map.of("userId", "admin", "password", "1234"));
+		//Map.of("userId", "admin", "password", "1234")
+		List<Member> members = mybatisRepository.selectListWithMap(Map.of("userId", "admin", "password", "1234"));
 		System.out.println(members);
 	}
 	
 	@Test
 	public void testSelectListToMap() {
-		List<Map<String, Object>> commandMaps = session.selectList(NAMESPACE+"selectListToMap");
+		List<Map<String, Object>> commandMaps = mybatisRepository.selectListToMap();
 		System.out.println(commandMaps);
 	}
 	
@@ -90,12 +82,12 @@ public class MybatisTest {
 	@Test
 	public void testInsertWithDTO() {
 		Member member = new Member();
-		member.setUserId("updateDumy");
+		member.setUserId("updateDumy2");
 		member.setPassword("1234");
 		member.setTell("010-0000-2222");
 		member.setEmail("mb@mb.com");
 		
-		int rows = session.insert(NAMESPACE+"insertWithDTO", member);
+		int rows = mybatisRepository.insertWithDTO(member);
 		System.out.println("영향을 받은 행의 개수 : " + rows);
 	}
 	
@@ -110,7 +102,7 @@ public class MybatisTest {
 		commandMap.put("title", "해리포터 외 2권");
 		commandMap.put("rentBookCnt", 3);
 		
-		session.insert(NAMESPACE+"insertWithMap", commandMap);
+		mybatisRepository.insertWithMap(commandMap);
 	}
 	
 	@Test
@@ -119,21 +111,17 @@ public class MybatisTest {
 		//1. RentMaster에 대출건에대한 정보를 입력
 		//2. 새롭게 입력된 RentMaster 테이블의 행을 참조하는 RentBook 정보를 입력, => 새롭게 입력된 RentMaster의 rm_idx
 		//3. 새롭게 입력된 RentBook 테이블 행을 참조하는 RentHistory 정보를 입력 => 새롭게 입력된 RentBook의 rb_idx
-		
 		Rent rent = new Rent();
 		rent.setUserId("mybatis");
 		rent.setTitle("바깥은 여름 외 0권");
 		rent.setRentBookCnt(1);
-		
-		session.insert(NAMESPACE + "insertRent", rent);
-		//System.out.println(rent);
+		mybatisRepository.insertRent(rent);
+		System.out.println(rent);
 		
 		RentBook rentBook = new RentBook();
 		rentBook.setRmIdx(rent.getRmIdx());
 		rentBook.setBkIdx(42);
-		rentBook.setReturnDate(LocalDateTime.now().plusDays(7));
-		
-		session.insert(NAMESPACE+"insertRentBook", rentBook);
+		mybatisRepository.insertRentBook(rentBook);
 		
 		//RentHistory에 대출히스토리 내용을 입력
 		// rm_idx, rb_idx, bk_idx, state("RE00")
@@ -142,28 +130,27 @@ public class MybatisTest {
 		rentHistory.setRbIdx(rentBook.getRbIdx());
 		rentHistory.setBkIdx(rentBook.getBkIdx());
 		rentHistory.setState("RE00");
-		
-		session.insert(NAMESPACE + "insertRentHistory", rentHistory);
+		mybatisRepository.insertRentHistory(rentHistory);
 	}
 	
 	@Test
 	public void update() {
 		Member member = new Member();
 		member.setUserId("updateDumy");
-		member.setPassword("updatepassword");
-		session.update(NAMESPACE+"update", member);
+		member.setPassword("passwordUpdate");
+		mybatisRepository.update(member);
 	}
 	
 	@Test
 	public void delete() {
-		session.delete(NAMESPACE+"delete", "updateDumy");
+		mybatisRepository.delete("updateDumy");
 	}
 	
 	@Test
 	public void dynamicIf() {
 		// 사용자가 도서 검색필터에서 title를 선택하고 검색하면 사용자의 키워드로 title 컬럼을 검색 (where title = #{title})
 		// 사용자가 도서 검색필터에서 author를 선택하고 검색하면 author 컬럼을 검색 (where author = #{author})
-		List<Book> books = session.selectList(NAMESPACE + "dynamicIf", Map.of("filter", "author", "keyword","김애란"));
+		List<Book> books = mybatisRepository.dynamicIf(Map.of("filter", "author", "keyword","김애란"));
 		System.out.println(books);
 	}
 	
@@ -172,7 +159,9 @@ public class MybatisTest {
 	public void dynamicChoose() {
 		// 사용자가 도서 검색필터에서 title를 선택하고 검색하면 사용자의 키워드로 title 컬럼을 검색 (where title = #{title})
 		// 사용자가 도서 검색필터에서 author를 선택하고 검색하면 author 컬럼을 검색 (where author = #{author})
-		List<Book> books = session.selectList(NAMESPACE + "dynamicChoose", Map.of("filter", "title", "keyword","디디"));
+		//Map.of("filter", "title", "keyword","디디")
+		
+		List<Book> books = mybatisRepository.dynamicChoose(Map.of("filter", "title", "keyword","디디"));
 		System.out.println(books);
 	}
 	
@@ -187,15 +176,15 @@ public class MybatisTest {
 		member.setEmail("zzz@mc.com");
 		member.setTell("010-0119-0112");
 		
-		session.update(NAMESPACE + "dynamicSet", member);
+		mybatisRepository.dynamicSet(member);
 	}
 	
 	@Test
 	public void dynamicForeach() {
 		
 		Map<String,Object> commandMap = Map.of("table","member","data"
-									,Map.of("user_id","dynamicForEach", "password","1234","email","aaa@bbb.com","tell","010-2222-3333"));
-		session.insert(NAMESPACE + "dynamicForEach",commandMap);
+									,Map.of("user_id","dynamicForEach2", "password","1234","email","aaa@bbb.com","tell","010-2222-3333"));
+		mybatisRepository.dynamicForEach(commandMap);
 	}
 	
 	@Test
@@ -204,15 +193,14 @@ public class MybatisTest {
 		// 검색 조건 :  대출가능여부, 제목, 작가
 		
 		String[] filters = {"title", "author"};
-		List<Book> books = session.selectList(NAMESPACE + "dynamicWhere"
-							, Map.of("filters", filters, "keyword","도시", "rentable", false));
+		List<Book> books = mybatisRepository.dynamicWhere(Map.of("filters", filters, "keyword","도시", "rentable", false));
 		System.out.println(books);
 	}
 	
 	@Test
 	public void testReusltMap() {
 		
-		Map<String,Object> res = session.selectOne(NAMESPACE + "resultMap", 27);
+		Map<String,Object> res = mybatisRepository.resultMap(27);
 		
 		System.out.println(res);
 		

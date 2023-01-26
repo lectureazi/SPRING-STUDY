@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <!-- namespace : 생성 될 프록시 객체의 타입  -->
-<mapper namespace="com.mc.mvc.Myabtis">
+<mapper namespace="com.mc.mvc.mybatis.repository.MybatisRepository">
 
 	<!-- 
 		#{} : preaparedStatement의 쿼리템플릿을 완성 시킨 뒤 파라미터값을 전달받아 쿼리를 완성한다.
@@ -14,69 +14,6 @@
 			쿼리템플릿을 완성시킨다. 잘 사용하면 만능 if문 처럼 유용한 쿼리를 작성할 수 있지만
 			잘 못 사용하면 sqlInjection 공격을 당할 수 있다.
 	 -->
-	
-	<select id="selectOne" resultType="com.mc.mvc.member.dto.Member">
-		select * from member where user_id = #{userId}	
-	</select>
-	
-	<select id="selectList" resultType="Member">
-		select * from member;
-	</select>
-
-	<select id="selectListWithDTO" resultType="Member">
-		select * from member 
-		where 
-		user_id = #{userId} 
-		and password = #{password}
-	</select>
-	
-	<select id="selectListWithMap" resultType="Member">
-		select * from member 
-		where 
-		user_id = #{userId} 
-		and password = #{password}
-	</select>
-	
-	<select id="selectListToMap" resultType="map">
-		select *
-		from member
-		join rent_master using(user_id)
-	</select>
-	
-	<insert id="insertWithDTO">
-		insert into member(user_id, password, tell, email)
-		values(#{userId}, #{password}, #{tell}, #{email})
-	</insert>
-	
-	<insert id="insertWithMap">
-		insert into rent_master(user_id, title, rent_book_cnt)
-		values(#{member.userId}, #{title}, #{rentBookCnt})
-	</insert>
-	
-	<insert id="insertRent" useGeneratedKeys="true" keyProperty="rmIdx"> 
-		insert into rent_master(user_id, title, rent_book_cnt)
-		values(#{userId}, #{title}, #{rentBookCnt})
-	</insert>
-	
-	<insert id="insertRentBook" useGeneratedKeys="true" keyProperty="rbIdx">
-		insert into rent_book(rm_idx, bk_idx, return_date)
-		values(#{rmIdx}, #{bkIdx}, #{returnDate})
-	</insert>
-	
-	<insert id="insertRentHistory">
-		insert into rent_history(rm_idx, rb_idx, bk_idx, state)
-		values(#{rmIdx},#{rbIdx},#{bkIdx},#{state})
-	</insert>
-	
-	<update id="update">
-		update member set password = #{password}
-		where user_id = #{userId}
-	</update>
-	
-	<delete id="delete">
-		delete from member where user_id = #{userId}
-	</delete>
-	
 	<select id="dynamicIf" resultType="Book">
 		select * from book
 		where
@@ -100,7 +37,6 @@
 			</otherwise>
 		</choose>
 	</select>
-	
 	
 	<update id="dynamicSet">
 		update member
@@ -161,18 +97,6 @@
 		<result column="isbn" javaType="string" property="isbn"/>
 		<result column="rent_book_cnt" javaType="int" property="rentBookCnt"/>
 	</resultMap>
-	
-	<select id="resultMap" resultMap="rentData">
-		select
-			rm_idx, rb_idx, user_id, return_date, rm.title
-			,isbn, rent_book_cnt
-		from rent_master rm
-		join rent_book using(rm_idx)
-		join book using(bk_idx)
-		
-		where rb_idx = #{rbIdx}
-	</select>
-	
 	
 	
 	
