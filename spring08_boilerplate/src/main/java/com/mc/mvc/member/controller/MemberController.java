@@ -1,15 +1,23 @@
 package com.mc.mvc.member.controller;
 
 import java.util.Map;
+import java.util.UUID;
+
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.mc.mvc.common.code.ErrorCode;
+import com.mc.mvc.common.exception.HandlableException;
 import com.mc.mvc.member.dto.Member;
 import com.mc.mvc.member.service.MemberService;
 
@@ -21,13 +29,21 @@ import lombok.RequiredArgsConstructor;
 //		@RequstMapping : 컨트롤러의 메서드와 매핑시킹 요청 url을 지정, 원하는 http method를 지정할 수 있다.
 //		@GetMapping	   : 컨트롤러의 메서드와 매핑시킹 GET 방식의 요청 url을 지정 
 //		@PostMapping   : 컨트롤러의 메서드와 매핑시킹 POST 방식의 요청 url을 지정
+
 //      @RequestParam  : content-type이 application/x-www-form-urlEncoded인 요청의 요청파라미터와 
 //					    컨트롤러 메서드의 매개변수를 바인드
+//						String또는 primitive type의 경우 default로 적용이 된다.
+//						컨트롤러의 메서드의 매개변수가 Map일 경우, @RequestParam 을 명시적으로 적용 해줘야한다.
 //						 	 name : 요청파라미터명, 매개변수에 바인드 시킬 요청파라미터명을 지정
 //								 만약 매개변수명과 요청파라미터명이 일치할 경우 생략
 //						     required : 특정 요청파라미터의 필수여부를 지정, default : true
 //								 컨트롤러의 매개변수로 선언한 요청파라미터가 전달되지 않을 시 예외가 발생
 //						  	 defaultValue : required가 false인 매개변수에, 요청파라미터가 전달 되지 않았을 경우 지정할 기본 값.
+
+//		@RequestBody  :  request body를 읽어서 자바의 객체에 bind, Content type 'application/x-www-form-urlencoded' not supported
+// 		@SessionAttribute : servlet의 HttpSession객체에 저장된 속성에 담긴 값을 컨트롤러의 매개변수에 바인드
+//		@PathVariable : url 템플릿에 담긴 파라미터값을 컨트롤러의 매개변수에 바인드
+
 //		@ModelAttribute : 컨트롤러의 매개변수에 DTO를 선언할 경우 set + 요청파라미터명으로 요청파리미터를 객체에 바인드 
 //						  요청파라미터가 바인된 DTO를 Model의 Attribute에 등록, 이때 Attribute name은 타입명(앞글자 소문자)을 따라간다.
 //						  Model에 Attribute로 등록된 DTO에 있는 객체를 매개변수에 담아주는 어노테이션
@@ -43,9 +59,42 @@ public class MemberController {
 	public void signup() {};
 	
 	@PostMapping("/mailauth")
-	public String signup(Member member, Model model) {
+	public String authenticateEmail(Member member, Model model, HttpSession session) {
+		
+		// 발송한 이메일에 포함된 url로 사용자가 재요청할 때 사용자의 정보를 DB에 저장
+		// 재요청때 까지 데이터를 저장하기 위해 세션객체에 사용자의 정보를 저장
+		session.setAttribute("signupForm", member);
+		
+		// 사용자가 재요청시 해당 요청이 유효한 요청인지 확인하기 위한 token을 발행
+		String authToken = UUID.randomUUID().toString();
+		session.setAttribute("authToken", authToken);
+		memberService.authenticateEmail(member, authToken);
+		return "redirect:/index";
+	}
+	
+	// @PathVariable : url에서 특정위치의 값을 컨트롤러의 매개변수에 바인드해준다.
+	// /member/signupImpl/{authToken} : /member/signImpl/* 로 시작하는 모든 요청에 대해 메서드를 호출
+	
+	@GetMapping("/signupImpl/{authToken}")
+	public String signUpImpl(HttpSession session, 
+							@PathVariable String authToken,
+							@SessionAttribute(name="authToken", required = false) String sessionToken,
+							@SessionAttribute(name="signupForm", required = false) Member member,
+							Model model) {
+		
+		// session에서 authToken을 꺼냈을 때 PathVariable로 받아온 authToken과 같지 않다면
+		if(!authToken.equals(sessionToken)) {
+			throw new HandlableException(ErrorCode.EXPRIATION_SIGNUP_TOKEN);
+		}
+		
+		// 회원 정보를 데이터베이스에 저장
 		memberService.insertNewMember(member);
-		return "redirect:index";
+		
+		// 세션에 저장된 토큰을 삭제
+		session.removeAttribute("authToken");
+		
+		return "redirect:/index";
+		
 	}
 	
 	@GetMapping("/checkId")

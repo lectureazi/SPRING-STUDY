@@ -23,10 +23,10 @@
 	<bean id="passwordEncoder" class="org.springframework.security.crypto.factory.PasswordEncoderFactories"
 			factory-method="createDelegatingPasswordEncoder"/>
 	
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
     	<property name="host" value="smtp.naver.com"/>
     	<property name="username" value="lecture_azi"></property>
-    	<property name="password" value=""></property>
+    	<property name="password" value="E.7PkVD~cKJA9qv"></property>
     	<property name="port" value="465"></property>
     	
     	<!-- 
@@ -42,10 +42,7 @@
     	 </property>
 	 </bean>
 	
-	<!-- this is a template message that we can pre-load with default state -->
-	<bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
-	    <property name="from" value="lecture_azi@naver.com"/>
-	</bean>
+	 <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 	
 	<mybatis:scan base-package="com.mc.mvc" annotation="org.springframework.stereotype.Repository"/>
 	

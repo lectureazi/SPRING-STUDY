@@ -45,9 +45,9 @@ public class MemberControllerTest {
 	@Test
 	public void testSendAuthenticateMail() throws Exception {
 		mockMvc.perform(post("/member/mailauth")
-				.param("userId", "testUser1")
+				.param("userId", "testUserWithEmail")
 				.param("password", "1234")
-				.param("email", "aaa@bbb.com")
+				.param("email", "azimemory@gmail.com")
 				.param("tell", "010-0119-0112"))
 		.andDo(print());
 	}
