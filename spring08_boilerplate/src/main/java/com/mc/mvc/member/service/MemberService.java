@@ -1,15 +1,14 @@
 package com.mc.mvc.member.service;
 
-import javax.mail.MessagingException;
-
 import com.mc.mvc.member.dto.Member;
+import com.mc.mvc.member.dto.validator.form.SignUpForm;
 
 public interface MemberService {
 	
-	Member selectUserById();
+	boolean existUser(String userId);
 
-	void insertNewMember(Member member);
+	void insertNewMember(SignUpForm form);
 
-	void authenticateEmail(Member member, String authToken);
+	void authenticateEmail(SignUpForm form, String authToken);
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import com.mc.mvc.common.code.Code;
 import com.mc.mvc.common.mail.MailSender;
 import com.mc.mvc.member.dto.Member;
+import com.mc.mvc.member.dto.validator.form.SignUpForm;
 import com.mc.mvc.member.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -33,21 +34,22 @@ public class MemberServiceImpl implements MemberService{
 	private final PasswordEncoder passwordEncoder;
 	
 	@Override
-	public Member selectUserById() {
-		return memberRepository.selectMemberByUserId("admin");
+	public boolean existUser(String userId) {
+		Member member = memberRepository.selectMemberByUserId(userId);
+		return member != null;
 	}
 
 	@Override
-	public void insertNewMember(Member member) {
-		member.setPassword(passwordEncoder.encode(member.getPassword()));
-		memberRepository.insertMember(member);
+	public void insertNewMember(SignUpForm form) {
+		form.setPassword(passwordEncoder.encode(form.getPassword()));
+		memberRepository.insertMember(form);
 	}
 
 	@Override
-	public void authenticateEmail(Member member, String authToken){
+	public void authenticateEmail(SignUpForm form, String authToken){
 		
 		Map<String, Object> body = new LinkedHashMap<String, Object>();
-		body.put("userId", member.getUserId());
+		body.put("userId", form.getUserId());
 		body.put("authToken", authToken);
 		body.put("mailTemplate", "signup-email-auth");
 		
@@ -60,7 +62,7 @@ public class MemberServiceImpl implements MemberService{
 		ResponseEntity<String> response =  restTemplate.exchange(request, String.class);
 		String html = response.getBody();
 		
-		sender.send(member.getEmail(), "회원가입을 환영합니다. 링크를 클릭해 회원가입을 완료하세요.", html);
+		sender.send(form.getEmail(), "회원가입을 환영합니다. 링크를 클릭해 회원가입을 완료하세요.", html);
 		
 	}
 	

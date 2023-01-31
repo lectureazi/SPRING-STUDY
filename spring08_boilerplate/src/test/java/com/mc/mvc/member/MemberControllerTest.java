@@ -52,7 +52,22 @@ public class MemberControllerTest {
 		.andDo(print());
 	}
 	
+	@Test
+	public void testCheckId() throws Exception {
+		mockMvc.perform(get("/member/checkId")
+				.param("userId", "admin"))
+				.andDo(print());
+	}
 	
+	@Test
+	public void testSignUpFormValidator() throws Exception {
+		mockMvc.perform(post("/member/mailauth")
+				.param("userId", "testUserWithEmail")
+				.param("password", "1234")
+				.param("email", "azimemory@gmail.com")
+				.param("tell", "010-0119-0112"))
+		.andDo(print());
+	}
 	
 	
 	

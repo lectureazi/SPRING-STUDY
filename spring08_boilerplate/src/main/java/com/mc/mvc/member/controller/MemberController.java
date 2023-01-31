@@ -6,19 +6,29 @@ import java.util.UUID;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.mc.mvc.common.code.ErrorCode;
 import com.mc.mvc.common.exception.HandlableException;
+import com.mc.mvc.common.validator.ValidatorResult;
 import com.mc.mvc.member.dto.Member;
+import com.mc.mvc.member.dto.validator.form.SignUpForm;
+import com.mc.mvc.member.dto.validator.form.SignUpFormValidator;
 import com.mc.mvc.member.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
@@ -41,6 +51,7 @@ import lombok.RequiredArgsConstructor;
 //						  	 defaultValue : required가 false인 매개변수에, 요청파라미터가 전달 되지 않았을 경우 지정할 기본 값.
 
 //		@RequestBody  :  request body를 읽어서 자바의 객체에 bind, Content type 'application/x-www-form-urlencoded' not supported
+//		@ResponseBody : 컨트롤러의 메서드가 반환하는 값을 응답바디에 넣어준다.
 // 		@SessionAttribute : servlet의 HttpSession객체에 저장된 속성에 담긴 값을 컨트롤러의 매개변수에 바인드
 //		@PathVariable : url 템플릿에 담긴 파라미터값을 컨트롤러의 매개변수에 바인드
 
@@ -48,27 +59,55 @@ import lombok.RequiredArgsConstructor;
 //						  요청파라미터가 바인된 DTO를 Model의 Attribute에 등록, 이때 Attribute name은 타입명(앞글자 소문자)을 따라간다.
 //						  Model에 Attribute로 등록된 DTO에 있는 객체를 매개변수에 담아주는 어노테이션
 
+//
+
 @Controller
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
 	
 	private final MemberService memberService;
+	private final SignUpFormValidator signUpFormValidator;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		// Controller메서드에 SignUpForm타입의 매개변수가 있을 경우
+		// Validator가 실행된다.
+		binder.addValidators(signUpFormValidator);
+	}
+	
 	
 	@GetMapping("/signup")
 	public void signup() {};
 	
 	@PostMapping("/mailauth")
-	public String authenticateEmail(Member member, Model model, HttpSession session) {
+	public String authenticateEmail(
+			@Validated SignUpForm form
+			,Errors error // validator로 사용한 form 객체 바로 뒤에 errors객체를 선언 
+			, Model model
+			, HttpSession session) {
+		
+		ValidatorResult vr = new ValidatorResult();
+		model.addAttribute("error", vr.getErrors());
+		
+		// validator를 통과하지 못했으면
+		if(error.hasErrors()) {
+			vr.addErrors(error);
+			return "/member/signup";
+		}
 		
 		// 발송한 이메일에 포함된 url로 사용자가 재요청할 때 사용자의 정보를 DB에 저장
 		// 재요청때 까지 데이터를 저장하기 위해 세션객체에 사용자의 정보를 저장
-		session.setAttribute("signupForm", member);
+		session.setAttribute("signupForm", form);
 		
 		// 사용자가 재요청시 해당 요청이 유효한 요청인지 확인하기 위한 token을 발행
 		String authToken = UUID.randomUUID().toString();
 		session.setAttribute("authToken", authToken);
-		memberService.authenticateEmail(member, authToken);
+		
+		//memberService.authenticateEmail(form, authToken);
+		
 		return "redirect:/index";
 	}
 	
@@ -79,7 +118,7 @@ public class MemberController {
 	public String signUpImpl(HttpSession session, 
 							@PathVariable String authToken,
 							@SessionAttribute(name="authToken", required = false) String sessionToken,
-							@SessionAttribute(name="signupForm", required = false) Member member,
+							@SessionAttribute(name="signupForm", required = false) SignUpForm form,
 							Model model) {
 		
 		// session에서 authToken을 꺼냈을 때 PathVariable로 받아온 authToken과 같지 않다면
@@ -88,18 +127,21 @@ public class MemberController {
 		}
 		
 		// 회원 정보를 데이터베이스에 저장
-		memberService.insertNewMember(member);
+		memberService.insertNewMember(form);
 		
 		// 세션에 저장된 토큰을 삭제
 		session.removeAttribute("authToken");
 		
 		return "redirect:/index";
-		
 	}
 	
+	
+	
 	@GetMapping("/checkId")
-	public void checkId(){
-		System.out.println(memberService.selectUserById());
+	@ResponseBody
+	public Map<String, Boolean> checkId(String userId){
+		//요청파라미터로 넘어온 회원의 존재 여부를 응답
+		return Map.of("exist" , memberService.existUser(userId));
 	}
 	
 	

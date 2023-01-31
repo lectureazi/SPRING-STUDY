@@ -1,9 +1,14 @@
 package com.mc.mvc.common.exception.handler;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.mc.mvc.common.exception.HandlableException;
 
@@ -14,7 +19,10 @@ import com.mc.mvc.common.exception.HandlableException;
 @ControllerAdvice(basePackages = "com.mc.mvc")
 public class ExceptionAdvice {
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	// 지정한 예외가 Controller에서 발생하면 어노테이션이 선언된 메서드가 호출 된다.
+	@ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(HandlableException.class)
 	public String handlingHandlableException(HandlableException e, Model model) {
 		model.addAttribute("msg", e.error.msg);
@@ -22,6 +30,20 @@ public class ExceptionAdvice {
 		return "common/alert-message";
 	}
 	
+	//DataAccessException : 스프링은 SQLException이 발생할 경우 해당 예외를 runtimeException인 
+	//DataAccessExceotion으로 wrapping 하여 서비스레이어에 전달
+	@ResponseStatus(code=HttpStatus.INTERNAL_SERVER_ERROR)
+	@ExceptionHandler(DataAccessException.class)
+	public String handlingDataAccessExceotuin(DataAccessException e, Model model) {
+		
+		// {} : 객체
+		// logger.error("test {}", member.getUserName()) => hello hmd
+		// logger에 두번째 매개변수로 Exception 객체를 넘기면 stacktrace를 출력해준다.
+		logger.error("{}", e);
+		model.addAttribute("msg", "데이터베이스 접속에 문제가 생겼습니다.");
+		model.addAttribute("redirect", "/index");
+		return "common/alert-message";
+	}
 	
 	
 	

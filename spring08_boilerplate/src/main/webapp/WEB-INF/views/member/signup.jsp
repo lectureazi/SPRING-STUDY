@@ -16,33 +16,60 @@
 <body>
 
 <h1>회원 가입 양식</h1>
-    <form action="${context}/member/mailauth" method="post" id="frmJoin">
+
+   <form:form action="${context}/member/mailauth" method="post" id="frmJoin"
+   	modelAttribute="signUpForm" >
+   	
      <table>
         <tr>
            <td>ID : </td>
            <td>
-           	  <input type="text" name="userId" id="id" size="10" />
-              <button type="button">check</button>
+           	  <input type="text" name="userId" id="inpId" size="10" 
+           	  	<c:if test="${empty error.userId}">
+           	  		value="${signUpForm.userId}"
+           	  	</c:if>         	  
+           	  />
+           	  
+              <button type="button" id="btnIdCheck">check</button>
               <span class="valid_info" id="idCheck"></span>
+              
+              <form:errors path="userId" />
+              
            </td>
         </tr>
         <tr>
            <td>PASSWORD : </td>
            <td>
-           	  <input type="password" name="password" id="pw" />
+           	  <input type="password" name="password" id="pw" 
+           	  	<c:if test="${empty error.password}">
+           	  		value="${signUpForm.password}"
+           	  	</c:if>         	  
+           	  />
+           	  
            	  <span id="pwConfirm" class="valid_info"></span>
+           	  
+           	  <form:errors path="password" cssClass="valid_info"/>
            </td>
         </tr>
+        
         <tr>
            <td>휴대폰번호 : </td>
            <td>
-           	  <input type="tel" name="tell" required/>
+           	  <input type="tel" name="tell" required  
+           	  <c:if test="${empty error.tell}">
+           	  		value="${signUpForm.tell}"
+           	  	</c:if> />
            </td>
         </tr>
         <tr>
            <td>email : </td>
            <td>
-           	  <input type="email" name="email" required/>
+           	  <input type="email" name="email" required 
+           	  	<c:if test="${empty error.email}">
+           	  		value="${signUpForm.email}"
+           	  	</c:if> 
+           	  />
+           	  
            </td>
         </tr>
         <tr>
@@ -52,7 +79,59 @@
            </td>
        </tr>
    </table>
-   </form>
+   </form:form>
+   <script type="text/javascript">
+   
+   let idCheckFlg = false;
+   
+   btnIdCheck.addEventListener("click", ev => {
+	 
+	   let userId = inpId.value;
+	   
+	   if(userId){
+		   
+		   fetch("/member/checkId?userId=" + userId)
+		   .then(response => response.json())
+		   .then(obj => {
+			   if(obj.exist){
+				   idCheck.innerHTML = '이미 존재하는 아이디 입니다.';
+				   idCheckFlg = false;
+				   return;
+			   }
+			   
+			   idCheck.innerHTML = '사용 가능한 아이디 입니다.';
+			   idCheckFlg = true;
+			   
+		   });
+	   }
+   })
+   
+   frmJoin.addEventListener('submit', ev => {
+	   if(!idCheckFlg){
+		   ev.preventDefault();
+		   alert("아이디 중복검사에 실패했습니다.");
+		   inpId.focus();   
+	   }
+	   
+   })
+   
+   
+   
+   
+   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import com.mc.mvc.member.dto.Member;
+import com.mc.mvc.member.dto.validator.form.SignUpForm;
 
 @Repository
 public interface MemberRepository {
@@ -15,5 +16,8 @@ public interface MemberRepository {
 
 	@Insert("insert into member (user_id, password, tell, email) "
 			+ "values(#{userId}, #{password}, #{tell},#{email})")
-	void insertMember(Member member);
+	void insertMember(SignUpForm form);
+
+	@Select("select * from member where email = #{email}")
+	Member selectMemberByEmail(String email);
 }
