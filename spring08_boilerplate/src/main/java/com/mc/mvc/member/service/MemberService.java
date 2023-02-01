@@ -1,7 +1,7 @@
 package com.mc.mvc.member.service;
 
 import com.mc.mvc.member.dto.Member;
-import com.mc.mvc.member.dto.validator.form.SignUpForm;
+import com.mc.mvc.member.validator.form.SignUpForm;
 
 public interface MemberService {
 	
@@ -10,5 +10,7 @@ public interface MemberService {
 	void insertNewMember(SignUpForm form);
 
 	void authenticateEmail(SignUpForm form, String authToken);
+
+	Member authenticateUser(Member member);
 
 }

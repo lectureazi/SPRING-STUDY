@@ -15,10 +15,12 @@
 		<typeAlias type="com.mc.mvc.rent.dto.RentHistory" alias="RentHistory"/>
 		<typeAlias type="com.mc.mvc.book.dto.Book" alias="Book"/>
 		<typeAlias type="java.time.LocalDateTime" alias="LocalDateTime"/>
+		<typeAlias type="com.mc.mvc.board.dto.Board" alias="Board"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mybatis/mapper/mybatisMapper.xml"/>
+		<mapper resource="mybatis/mapper/BoardMapper.xml"/>
 	</mappers>
 
 

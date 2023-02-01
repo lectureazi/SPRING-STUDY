@@ -18,8 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import com.mc.mvc.common.code.Code;
 import com.mc.mvc.common.mail.MailSender;
 import com.mc.mvc.member.dto.Member;
-import com.mc.mvc.member.dto.validator.form.SignUpForm;
 import com.mc.mvc.member.repository.MemberRepository;
+import com.mc.mvc.member.validator.form.SignUpForm;
 
 import lombok.RequiredArgsConstructor;
 
@@ -65,6 +65,30 @@ public class MemberServiceImpl implements MemberService{
 		sender.send(form.getEmail(), "회원가입을 환영합니다. 링크를 클릭해 회원가입을 완료하세요.", html);
 		
 	}
+
+	@Override
+	public Member authenticateUser(Member rowMember) {
+		
+		Member member = memberRepository.selectMemberByUserId(rowMember.getUserId());
+		
+		if(member == null) return null;
+		if(!passwordEncoder.matches(rowMember.getPassword(), member.getPassword())) return null;
+		
+		return member;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

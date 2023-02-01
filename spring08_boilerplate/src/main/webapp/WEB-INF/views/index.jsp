@@ -3,6 +3,11 @@
 
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <body>
-<h1>Hello Spring!</h1>
+
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
+<div class="container wrap_content">
+	<h1>Hello Spring!</h1>
+</div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>

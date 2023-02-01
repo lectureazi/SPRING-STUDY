@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import com.mc.mvc.member.dto.Member;
-import com.mc.mvc.member.dto.validator.form.SignUpForm;
+import com.mc.mvc.member.validator.form.SignUpForm;
 
 @Repository
 public interface MemberRepository {

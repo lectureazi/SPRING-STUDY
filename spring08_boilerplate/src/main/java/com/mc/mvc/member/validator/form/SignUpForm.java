@@ -1,4 +1,4 @@
-package com.mc.mvc.member.dto.validator.form;
+package com.mc.mvc.member.validator.form;
 
 import lombok.Data;
 
