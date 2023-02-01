@@ -45,9 +45,7 @@
 	 <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 	 
 	 	
-	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
-		<property name="maxUploadSize" value="10485760"/>	
-	</bean>
+	
 	<mybatis:scan base-package="com.mc.mvc" annotation="org.springframework.stereotype.Repository"/>
 	
 	
