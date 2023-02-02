@@ -58,6 +58,7 @@ public class BoardControllerTest {
 				.param("content", "게시글업로드테스트 중입니다.")
 				.sessionAttr("auth", member))
 		.andDo(print());
+		
 	}
 	
 	

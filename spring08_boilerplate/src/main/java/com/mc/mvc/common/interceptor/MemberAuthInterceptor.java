@@ -23,7 +23,7 @@ public class MemberAuthInterceptor implements HandlerInterceptor{
 		switch (uriArr[2]) {
 		case "mypage":
 			if(session.getAttribute("auth") == null) throw new HandlableException(ErrorCode.UNAUTHORIZED_REQUEST);
-			
+			break;
 		default:
 			break;
 		}

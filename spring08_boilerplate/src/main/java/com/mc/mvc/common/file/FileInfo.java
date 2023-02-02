@@ -1,6 +1,9 @@
 package com.mc.mvc.common.file;
 
 import java.time.LocalDateTime;
+
+import com.mc.mvc.common.code.Code;
+
 import lombok.Data;
 
 @Data
@@ -12,5 +15,15 @@ public class FileInfo {
 	private String savePath;
 	private LocalDateTime regDate;
 	private Boolean isDel;
-	private int bdIdx;
+	private String groupName;
+	private int gnIdx;
+	
+	public String getFullPath() {
+		return Code.STORAGE_PATH + groupName + "/" + savePath + renameFileName;
+	}
+	
+	
+	
+	
+	
 }
